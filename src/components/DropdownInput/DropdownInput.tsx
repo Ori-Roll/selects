@@ -10,6 +10,8 @@ type DropdownInputProps = React.DetailedHTMLProps<
 };
 
 // TODO: These can come from some constants dir or a lib
+// TODO: Split into normal and dropdown (use some base-input component)
+
 const OPEN_ARROW = '\u25B2';
 const CLOSE_ARROW = '\u25BC';
 

@@ -1,5 +1,8 @@
 .wrapper {
   border: 1px solid #d3d3d3;
+  width: inherit;
+  display: flex;
+  justify-content: space-between;
 }
 
 .input {
@@ -9,6 +12,7 @@
   background-color: #ffffff;
   font: inherit;
   text-overflow: ellipsis;
+  width: 100%;
 }
 
 .arrow {

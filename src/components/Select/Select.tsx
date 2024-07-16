@@ -23,7 +23,7 @@ type SingleSelectProps = {
   multiple?: false;
   selected?: string;
   onSelect: (
-    selectedItems: string | null,
+    selectedItem: string | null,
     e?: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
 };
@@ -96,7 +96,7 @@ const TestMultiSelect = (props: SelectBaseProps) => {
   };
 
   return (
-    <div>
+    <div className={style['select-wrapper']}>
       <DropdownInput
         open={open}
         setOpen={setOpen}
@@ -118,12 +118,15 @@ const TestMultiSelect = (props: SelectBaseProps) => {
               </div>
             );
           })}
+          {multiple && !!selectedItems?.length && open && (
+            <button
+              className={style['deselect-all']}
+              onClick={handleDeSelectAll}
+            >
+              Deselect all
+            </button>
+          )}
         </div>
-      )}
-      {multiple && !!selectedItems?.length && (
-        <button className={style['deselect-all']} onClick={handleDeSelectAll}>
-          Deselect all
-        </button>
       )}
     </div>
   );

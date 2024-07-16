@@ -2,9 +2,13 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  position: absolute;
   gap: 4px;
   cursor: pointer;
   margin-top: 15px;
+  width: inherit;
+  max-height: 250px;
+  overflow-y: auto;
 }
 
 .option {
@@ -26,4 +30,9 @@
   outline: none;
   color: #0a3d70;
   cursor: pointer;
+}
+
+.select-wrapper {
+  width: 250px;
+  position: relative;
 }

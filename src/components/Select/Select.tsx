@@ -13,7 +13,7 @@ export type Option = { id: string; label: string };
 type MultiSelectProps = {
   multiple: true;
   selected?: string[];
-  onSelect: (
+  onSelect?: (
     selectedItems: string[],
     e?: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
@@ -22,7 +22,7 @@ type MultiSelectProps = {
 type SingleSelectProps = {
   multiple?: false;
   selected?: string;
-  onSelect: (
+  onSelect?: (
     selectedItem: string | null,
     e?: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void;
@@ -31,15 +31,20 @@ type SingleSelectProps = {
 type SelectBaseProps = {
   options: Option[];
   placeholder?: string;
+  selectProps?: React.DetailedHTMLProps<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+  >;
 } & (MultiSelectProps | SingleSelectProps);
 
-const TestMultiSelect = (props: SelectBaseProps) => {
+const Select = (props: SelectBaseProps) => {
   const {
     options,
     onSelect,
     multiple,
     selected,
     placeholder = DEFAULT_PLACEHOLDER,
+    selectProps,
   } = props;
 
   const initSelectedItems = () => {
@@ -60,16 +65,16 @@ const TestMultiSelect = (props: SelectBaseProps) => {
         ? selectedItems.filter((optionId) => optionId !== option.id)
         : [...(selectedItems || []), option.id];
       setSelectedItems(newSelectedValues);
-      onSelect(newSelectedValues, e);
+      onSelect?.(newSelectedValues, e);
       return;
     }
     if (!selectedItems?.includes(option.id)) {
       setSelectedItems([option.id]);
-      onSelect(option.id, e);
+      onSelect?.(option.id, e);
       setOpen(false);
     } else {
       setSelectedItems([]);
-      onSelect(null, e);
+      onSelect?.(null, e);
     }
   };
 
@@ -92,7 +97,7 @@ const TestMultiSelect = (props: SelectBaseProps) => {
   const handleDeSelectAll = () => {
     if (!multiple) return;
     setSelectedItems([]);
-    onSelect([]);
+    onSelect?.([]);
   };
 
   return (
@@ -128,8 +133,19 @@ const TestMultiSelect = (props: SelectBaseProps) => {
           )}
         </div>
       )}
+      <select
+        className={style.hiddenSelect}
+        multiple={multiple}
+        value={multiple ? selectedItems : selectedItems[0]}
+        onChange={() => {}}
+        {...selectProps}
+      >
+        {options?.map((option) => (
+          <option key={option.id} value={option.id} />
+        ))}
+      </select>
     </div>
   );
 };
 
-export default TestMultiSelect;
+export default Select;

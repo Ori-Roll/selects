@@ -2,8 +2,15 @@ import React from 'react';
 import Select from '../Select/Select';
 import style from './form.module.css';
 import Input from '../Input/Input';
+import { extractDataFromForm } from './utils';
 
-const mockData = [
+const mockDataSingle = [
+  { id: '1', label: 'Option 1' },
+  { id: '2', label: 'Option 2' },
+  { id: '3', label: 'Option 3' },
+];
+
+const mockDataMulti = [
   { id: '1', label: 'Option 1' },
   { id: '2', label: 'Option 2' },
   { id: '3', label: 'Option 3' },
@@ -11,37 +18,34 @@ const mockData = [
   { id: '5', label: 'Option 5' },
 ];
 
-type FormProps = {};
+const Form = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = extractDataFromForm(e);
 
-const Form = (props: FormProps) => {
-  const handleSingleSelect = (selectedItem: string) => {
-    console.log(selectedItem);
-  };
-  const handleMultiSelect = (selectedItems: string[]) => {
-    console.log(selectedItems);
-  };
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+    console.log('data', data); // Log the form values to the console
   };
 
   return (
-    <div className={style['form-wrapper']}>
-      <Select
-        options={mockData}
-        multiple
-        selected={['1', '4']}
-        onSelect={handleMultiSelect}
-      />
-      <Select options={mockData} onSelect={handleSingleSelect} />
-      <Input placeholder="Please select a name" onChange={handleNameChange} />
-      <Input
-        placeholder="Please select an email"
-        onChange={handleEmailChange}
-      />
-    </div>
+    <form className={style['form-wrapper']} onSubmit={handleSubmit}>
+      <div className={style['form-options-wrapper']}>
+        <Select
+          options={mockDataMulti}
+          multiple
+          selected={['1', '4']}
+          selectProps={{ name: 'select-multiple' }}
+        />
+        <Select
+          options={mockDataSingle}
+          selectProps={{ name: 'select-single' }}
+        />
+        <Input placeholder="Please select a name" name="name" />
+        <Input name="email" placeholder="Please select an email" />
+      </div>
+      <button className={style['form-submit-btn']} type="submit">
+        Submit
+      </button>
+    </form>
   );
 };
 

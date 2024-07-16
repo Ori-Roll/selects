@@ -1,0 +1,20 @@
+.options {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.option {
+  display: flex;
+  gap: 6px;
+  padding: 6px 8px 10px;
+  user-select: none;
+  background-color: #d9e0e3;
+}
+
+.checked {
+  background-color: #3399ff;
+}

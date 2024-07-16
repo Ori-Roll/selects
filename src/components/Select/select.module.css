@@ -9,6 +9,8 @@
   width: inherit;
   max-height: 250px;
   overflow-y: auto;
+  background-color: #ffffff;
+  border: 1px solid #d3d3d3;
 }
 
 .option {
@@ -16,23 +18,27 @@
   gap: 6px;
   padding: 6px 8px 10px;
   user-select: none;
-  background-color: #d9e0e3;
 }
 
 .checked {
-  background-color: #3399ff;
+  background-color: #e1e1e1;
 }
 
 .deselect-all {
   background: none;
   border: none;
-  padding: 8px;
+  padding: 8px 16px;
   outline: none;
   color: #0a3d70;
   cursor: pointer;
+  align-self: flex-end;
 }
 
 .select-wrapper {
   width: 250px;
   position: relative;
+}
+
+.hiddenSelect {
+  display: none;
 }

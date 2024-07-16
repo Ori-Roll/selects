@@ -10,7 +10,7 @@ const mockData = [
 ];
 
 function App() {
-  const handleSelect = (selectedItem: string | null) => {
+  const handleSelect = (selectedItem: string[]) => {
     console.log(selectedItem);
   };
 
@@ -19,10 +19,9 @@ function App() {
       <div className="main-layout">
         <Select
           options={mockData}
-          // multiple={true}
-          // selected={['1', '4']}
+          multiple={true}
+          selected={['1', '4']}
           onSelect={handleSelect}
-          placeholder="THIS"
         />
       </div>
     </>

@@ -89,6 +89,12 @@ const TestMultiSelect = (props: SelectBaseProps) => {
     return placeholder;
   };
 
+  const handleDeSelectAll = () => {
+    if (!multiple) return;
+    setSelectedItems([]);
+    onSelect([]);
+  };
+
   return (
     <div>
       <DropdownInput
@@ -113,6 +119,11 @@ const TestMultiSelect = (props: SelectBaseProps) => {
             );
           })}
         </div>
+      )}
+      {multiple && !!selectedItems?.length && (
+        <button className={style['deselect-all']} onClick={handleDeSelectAll}>
+          Deselect all
+        </button>
       )}
     </div>
   );

@@ -18,3 +18,12 @@
 .checked {
   background-color: #3399ff;
 }
+
+.deselect-all {
+  background: none;
+  border: none;
+  padding: 8px;
+  outline: none;
+  color: #0a3d70;
+  cursor: pointer;
+}

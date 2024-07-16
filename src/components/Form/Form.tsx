@@ -1,5 +1,7 @@
 import React from 'react';
 import Select from '../Select/Select';
+import style from './form.module.css';
+import Input from '../Input/Input';
 
 const mockData = [
   { id: '1', label: 'Option 1' },
@@ -12,17 +14,32 @@ const mockData = [
 type FormProps = {};
 
 const Form = (props: FormProps) => {
-  const handleSelect = (selectedItem: string[]) => {
+  const handleSingleSelect = (selectedItem: string) => {
     console.log(selectedItem);
+  };
+  const handleMultiSelect = (selectedItems: string[]) => {
+    console.log(selectedItems);
+  };
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+  };
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
   };
 
   return (
-    <div>
+    <div className={style['form-wrapper']}>
       <Select
         options={mockData}
-        multiple={true}
+        multiple
         selected={['1', '4']}
-        onSelect={handleSelect}
+        onSelect={handleMultiSelect}
+      />
+      <Select options={mockData} onSelect={handleSingleSelect} />
+      <Input placeholder="Please select a name" onChange={handleNameChange} />
+      <Input
+        placeholder="Please select an email"
+        onChange={handleEmailChange}
       />
     </div>
   );
